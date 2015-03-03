@@ -17,6 +17,18 @@
  * under the License.
  */
 
+function onDeviceConnected(data) {
+    alert("onDeviceConnected: " + data);
+}
+
+function onSuccessScanPaymentCard(data) {
+    alert("onSuccessScanPaymentCard: " + data);
+}
+
+function onBarcodeScanned(data) {
+    alert("onBarcodeScanned: " + data.rawCodesArr);
+}
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -32,8 +44,9 @@ var app = {
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
+    // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+         LineaProCDV.initDT(onDeviceConnected, onSuccessScanPaymentCard, onBarcodeScanned);
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
@@ -48,3 +61,5 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+app.initialize();
